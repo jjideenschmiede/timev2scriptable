@@ -51,6 +51,9 @@ request.headers = {
 // Read JSON data
 const respone = await request.loadJSON()
 
+// Round net sales
+const netSales = Math.round((respone.report.net_sales + Number.EPSILON) * 100) / 100
+
 // Check widget is running
 if (config.runsInWidget) {
 
@@ -59,9 +62,9 @@ if (config.runsInWidget) {
 
     // Check widget size
     if (config.widgetFamily == "small") {
-        widget = createSmallWidget(respone.report.net_sales)
+        widget = createSmallWidget(netSales)
     } else {
-        widget = createWidget(respone.report.net_sales)
+        widget = createWidget(netSales)
     }
 
     // Create widget
@@ -82,8 +85,8 @@ if (config.runsInWidget) {
     table.addRow(row)
 
     // Add rows
-    table.addRow(createRow(`${respone.report.net_sales} €`))
-    table.addRow(createRow(`Umsätze für ${month(time)} ${time.getFullYear()}.`))
+    table.addRow(createRow(`${netSales} €`))
+    table.addRow(createRow(`Umsätze im ${month(time)} ${time.getFullYear()}.`))
 
     // Show table
     table.present()
@@ -129,7 +132,7 @@ function createSmallWidget(data) {
     body.font = Font.systemFont(25)
 
     // Footer
-    let footer = widget.addText(`Umsätze für ${month(time)} ${time.getFullYear()}.`)
+    let footer = widget.addText(`Umsätze im ${month(time)} ${time.getFullYear()}.`)
     footer.textColor = Color.white()
     footer.font = Font.systemFont(9)
 
@@ -161,7 +164,7 @@ function createWidget(data) {
     body.font = Font.systemFont(40)
 
     // Footer
-    let footer = widget.addText(`Umsätze für ${month(time)} ${time.getFullYear()}.`)
+    let footer = widget.addText(`Umsätze im ${month(time)} ${time.getFullYear()}.`)
     footer.textColor = Color.white()
     footer.font = Font.systemFont(20)
 
