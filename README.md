@@ -1,1 +1,2 @@
-scriptable
+# timev2 Scriptable
+With this small code snippet you get your monthly overview of your timev2 application on your iPhone. Just load the code into the scriptable app and enter the **token** and **domain key**.
