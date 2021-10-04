@@ -15,7 +15,7 @@ function date(time) {
 
     // Save month
     function month() {
-        if (time.getMonth() < 10) {
+        if (time.getMonth() < 9) {
             return "0" + (time.getMonth() + 1)
         } else {
             return time.getMonth() + 1
